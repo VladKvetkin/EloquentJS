@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Build a table</title>
+</head>
+<body>
+	<style type="text/css">
+		table { border-collapse: collapse; }
+		td, th { border: 1px solid black; padding: 3px 8px; }
+		th { text-align: left; }
+	</style>
+
+	<script>
+		function buildTable(data) {
+			var table = document.createElement("table");
+
+			var tableHeaders = Object.keys(data[0]);
+
+			var tableRow = document.createElement("tr");
+			table.appendChild(tableRow);
+			for (var i = 0; i < tableHeaders.length; ++i) {
+				var tableHeader = document.createElement("th");
+				tableHeader.appendChild(document.createTextNode(tableHeaders[i]));
+				tableRow.appendChild(tableHeader);
+			}
+
+			var mountainsNames = data.map(function(mountain) {
+				return mountain.name;
+			});
+
+			var mountainsHeights = data.map(function(mountain) {
+				return mountain.height;
+			});
+
+			var mountainsCountries = data.map(function(mountain) {
+				return mountain.country;
+			});
+
+			var mountainsData = [];
+			mountainsData.push(mountainsNames, mountainsHeights, mountainsCountries);
+
+			for (var i = 0; i < data.length; ++i) {
+
+				var tableRow = document.createElement("tr");
+
+				for (var j = 0; j < tableHeaders.length; ++j) {
+					var tableData = document.createElement("td");
+					tableData.appendChild(document.createTextNode(mountainsData[j][i]));
+					if (j == 1) tableData.style.textAlign = "right";
+					tableRow.appendChild(tableData);
+				}
+
+				table.appendChild(tableRow);
+			}
+
+			return table;
+		}
+
+		var MOUNTAINS = [
+										  {name: "Kilimanjaro", height: 5895, country: "Tanzania"},
+										  {name: "Everest", height: 8848, country: "Nepal"},
+										  {name: "Mount Fuji", height: 3776, country: "Japan"},
+										  {name: "Mont Blanc", height: 4808, country: "Italy/France"},
+										  {name: "Vaalserberg", height: 323, country: "Netherlands"},
+										  {name: "Denali", height: 6168, country: "United States"},
+										  {name: "Popocatepetl", height: 5465, country: "Mexico"}
+										];
+		document.body.appendChild(buildTable(MOUNTAINS));
+	</script>
+</body>
+</html>

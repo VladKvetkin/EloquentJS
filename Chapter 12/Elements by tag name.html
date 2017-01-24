@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Learn JavaScript</title>
+</head>
+<body>
+
+	<h1>Heading with a <span>span</span> element.</h1>
+	<p>A paragraph with <span>one</span>, <span>two</span>
+		spans.</p>
+
+	<script>
+		function byTagName(node, tagName) {
+			var childsByTagName = [];
+
+			for (var i = 0; i < node.childNodes.length; ++i) {
+				var child = node.childNodes[i];
+
+				if (child.nodeType == 1 && child.tagName.toLowerCase() == tagName )
+					childsByTagName.push(child);
+
+				if (child.childNodes.length != 0) {
+					var childs = byTagName(child, tagName);
+					childsByTagName = childsByTagName.concat(childs);
+				}
+			}
+
+			return childsByTagName;
+		}
+
+		console.log(byTagName(document.body, "h1").length);
+		// → 1
+		console.log(byTagName(document.body, "span").length);
+		// → 3
+		var para = document.querySelector("p");
+		console.log(byTagName(para, "span").length);
+		// → 2
+</script>
+</body>
+</html>
