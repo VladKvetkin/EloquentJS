@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>Shapes</title>
+</head>
+<body>
+	<canvas width="1000" height="1000"></canvas>
+	<script>
+		var cx = document.querySelector("canvas").getContext("2d");
+
+		function drawTrapeze(x, y) {
+			cx.beginPath();
+
+			cx.moveTo(x, y);
+			cx.lineTo(x + 100, y);
+			cx.lineTo(x + 130, y + 80);
+			cx.lineTo(x - 30, y + 80);
+			cx.lineTo(x, y);
+
+			cx.stroke();
+		}
+		drawTrapeze(60, 120);
+
+
+		function rhomb(x, y) {
+			cx.beginPath();
+
+			cx.moveTo(x, y);
+			cx.lineTo(x + 50, y + 50);
+			cx.lineTo(x, y + 100);
+			cx.lineTo(x - 50, y + 50);
+			cx.closePath();
+
+			cx.fillStyle = "red";
+			cx.fill();
+		}
+		rhomb(300, 100);
+
+		function zigzag(x, y) {
+			cx.beginPath();
+
+			cx.moveTo(x, y + 50);
+
+			for (var i = 1; i < 7; ++i) {
+				cx.lineTo(x + 80, y + (50 + 30 * i));
+				cx.lineTo(x, y + (60 + 30 * i));
+			}
+
+			cx.stroke();
+		}
+		zigzag(400, 0)
+	</script>
+</body>
+</html>
